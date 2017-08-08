@@ -92,6 +92,7 @@ def handle_location(event):
         # ))
         shop_image1 = rest['image_url']['shop_image1']
         print("###")
+        print(type(shop_image1))
         print(shop_image1)
         print("###")
         if shop_image1 is {}:
