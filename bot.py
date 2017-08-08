@@ -12,7 +12,8 @@ from linebot.exceptions import (
 )
 from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage, LocationMessage,
-    CarouselTemplate, CarouselColumn, TemplateSendMessage, PostbackTemplateAction, MessageTemplateAction, URITemplateAction
+    CarouselTemplate, CarouselColumn, TemplateSendMessage, PostbackTemplateAction, MessageTemplateAction,
+    URITemplateAction, StickerSendMessage
 )
 
 app = Flask(__name__)
@@ -98,14 +99,22 @@ def handle_location(event):
     print(">>> {} <<<".format(len(c_cols)))
 
 
+    # line_bot_api.reply_message(
+    #     event.reply_token,
+    #     TemplateSendMessage(
+    #         alt_text='Carousel template',
+    #         template=CarouselTemplate(columns=c_cols)))
     line_bot_api.reply_message(
         event.reply_token,
-        TemplateSendMessage(
-            alt_text='Carousel template',
-            template=CarouselTemplate(columns=c_cols)))
+        StickerSendMessage(
+            package_id='1',
+            sticker_id='1'
+        ))
+
     # line_bot_api.reply_message(
     #     event.reply_token,
     #     TextSendMessage(text=msg))
+
 
 
 if __name__ == "__main__":
