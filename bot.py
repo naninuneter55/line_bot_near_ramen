@@ -64,10 +64,14 @@ def handle_location(event):
     json = data.json()
     rest_names = []
     rests = json['result']['rest'][:5]
-    for rest in json['result']['rest']:
+    for rest in rests:
         rest_names.append(rest['name'])
     msg = "\n".join(rest_names)
     print(">>> {} <<<".format(msg))
+
+
+
+
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text=msg))
