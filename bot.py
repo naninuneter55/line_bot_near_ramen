@@ -47,10 +47,10 @@ def handle_location(event):
         TextSendMessage(text="今いるのは「" + event.message.address + "」"))
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text="緯度は「" + event.message.latitude + "」"))
+        TextSendMessage(text="緯度は「" + str(event.message.latitude) + "」"))
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text="経度は「" + event.message.longitude + "」"))
+        TextSendMessage(text="経度は「" + str(event.message.longitude) + "」"))
 
 if __name__ == "__main__":
     app.run(debug=True)
