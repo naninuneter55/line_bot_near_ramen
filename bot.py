@@ -90,13 +90,15 @@ def handle_location(event):
         #         )
         #     ]
         # ))
-        print("%%% {} %%%".format(rest['image_url']))
         shop_image1 = rest['image_url']['shop_image1']
-        print("%%% {} %%%".format(type(shop_image1)))
-        if shop_image1 is "":
-            print("shop_image1 is \"\"")
-        if shop_image1 is None:
-            print("shop_image1 is None")
+        if shop_image1 is {}:
+            shop_image1 = ""
+        # print("%%% {} %%%".format(rest['image_url']))
+        # print("%%% {} %%%".format(type(shop_image1)))
+        # if shop_image1 is "":
+        #     print("shop_image1 is \"\"")
+        # if shop_image1 is None:
+        #     print("shop_image1 is None")
         print("=== {} ===".format(rest['image_url']['shop_image1']))
         c_cols.append(CarouselColumn(
             thumbnail_image_url='https://example.com/item1.jpg',
