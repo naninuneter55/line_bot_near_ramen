@@ -1,5 +1,8 @@
 from flask import Flask, request, abort
 import os
+import urllib
+import requests
+
 
 from linebot import (
     LineBotApi, WebhookHandler
@@ -41,9 +44,23 @@ def handle_message(event):
 
 @handler.add(MessageEvent, message=LocationMessage)
 def handle_location(event):
-    print("=== {} ===".format(event.message.address))
-    msg = "今いるのは「" + event.message.address + "」緯度は「" + str(event.message.latitude) + "」経度は「" + str(
-        event.message.longitude) + "」"
+    latitude = event.message.latitude
+    longitude = event.message.longitude
+    msg = "今いるのは「" + event.message.address + "」緯度は「" + str(latitude) + "」経度は「" + str(longitude) + "」"
+    print("=== {} ===".format(msg))
+    url = "https://zunda-api.herokuapp.com/api/gnavi/search_rest"
+
+    query = [
+        ("latitude", latitude),
+        ("longitude", longitude),
+    ]
+    url += "?{0}".format(urllib.parse.urlencode(query))
+    try:
+        data = requests.get(url_base + url)
+    except ValueError:
+        print("APIアクセスに失敗しました。")
+    json = data.json()
+    print("=== {} ===".format(json))
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text=msg))
