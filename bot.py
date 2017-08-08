@@ -146,12 +146,22 @@ def handle_location(event):
         )
     )
 
+    try:
+        line_bot_api.reply_message(
+            event.reply_token,
+            TemplateSendMessage(
+                alt_text='Carousel template',
+                template=carousel_template_message))
+    except line_bot_api.exceptions.LineBotApiError as e:
+        print(e.status_code)
+        print(e.error.message)
+        print(e.error.details)
 
-    line_bot_api.reply_message(
-        event.reply_token,
-        TemplateSendMessage(
-            alt_text='Carousel template',
-            template=carousel_template_message))
+    # line_bot_api.reply_message(
+    #     event.reply_token,
+    #     TemplateSendMessage(
+    #         alt_text='Carousel template',
+    #         template=carousel_template_message))
 
     # line_bot_api.reply_message(
     #     event.reply_token,
