@@ -63,6 +63,7 @@ def handle_location(event):
         print("APIアクセスに失敗しました。")
     json = data.json()
     rest_names = []
+    rests = json['result']['rest'][:5]
     for rest in json['result']['rest']:
         rest_names.append(rest['name'])
     msg = "\n".join(rest_names)
