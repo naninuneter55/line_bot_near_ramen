@@ -8,7 +8,7 @@ from linebot import (
     LineBotApi, WebhookHandler
 )
 from linebot.exceptions import (
-    InvalidSignatureError
+    InvalidSignatureError, LineBotApiError
 )
 from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage, LocationMessage,
@@ -152,7 +152,7 @@ def handle_location(event):
             TemplateSendMessage(
                 alt_text='Carousel template',
                 template=carousel_template_message))
-    except line_bot_api.exceptions.LineBotApiError as e:
+    except LineBotApiError as e:
         print(e.status_code)
         print(e.error.message)
         print(e.error.details)
