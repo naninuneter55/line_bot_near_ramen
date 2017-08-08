@@ -94,7 +94,7 @@ def handle_location(event):
         c_cols.append(CarouselColumn(
             thumbnail_image_url='https://example.com/item1.jpg',
             title=rest['name'],
-            text='description1',
+            text=rest['pr']['pr_short'],
             actions=[
                 PostbackTemplateAction(
                     label='postback1',
