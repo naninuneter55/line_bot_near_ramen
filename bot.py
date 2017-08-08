@@ -64,30 +64,35 @@ def handle_location(event):
         print("APIアクセスに失敗しました。")
     json = data.json()
     rest_names = []
-    rests = json['result']['rest'][:5]
+    rests = json['result']['rest']
+    cnt = 0
     for rest in rests:
-        rest_names.append(rest['name'])
-        c_cols = []
-        c_cols.append(CarouselColumn(
-            thumbnail_image_url=rest['shop_image1'],
-            title=rest['name'],
-            text=rest['name'],
-            # actions=[
-            #     PostbackTemplateAction(
-            #         label='postback1',
-            #         text='postback text1',
-            #         data='action=buy&itemid=1'
-            #     ),
-            #     MessageTemplateAction(
-            #         label='message1',
-            #         text='message text1'
-            #     ),
-            #     URITemplateAction(
-            #         label='uri1',
-            #         uri='http://example.com/1'
-            #     )
-            # ]
-        ))
+        if rest['shop_image1'] is not None:
+            rest_names.append(rest['name'])
+            c_cols = []
+            c_cols.append(CarouselColumn(
+                thumbnail_image_url=rest['shop_image1'],
+                title=rest['name'],
+                text=rest['name'],
+                # actions=[
+                #     PostbackTemplateAction(
+                #         label='postback1',
+                #         text='postback text1',
+                #         data='action=buy&itemid=1'
+                #     ),
+                #     MessageTemplateAction(
+                #         label='message1',
+                #         text='message text1'
+                #     ),
+                #     URITemplateAction(
+                #         label='uri1',
+                #         uri='http://example.com/1'
+                #     )
+                # ]
+            ))
+        cnt += 1
+        if cnt == 5:
+            break;
 
     msg = "\n".join(rest_names)
     print(">>> {} <<<".format(msg))
