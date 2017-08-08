@@ -95,6 +95,7 @@ def handle_location(event):
 
     msg = "\n".join(rest_names)
     print(">>> {} <<<".format(msg))
+    print(">>> {} <<<".format(len(c_cols)))
 
 
     line_bot_api.reply_message(
