@@ -95,7 +95,7 @@ def handle_location(event):
         print(type(shop_image1))
         print(shop_image1)
         print("###")
-        if shop_image1 is {}:
+        if not shop_image1:
             print("#######################")
             shop_image1 = ""
         # print("%%% {} %%%".format(rest['image_url']))
