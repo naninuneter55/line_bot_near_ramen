@@ -97,7 +97,7 @@ def handle_location(event):
         event.reply_token,
         TemplateSendMessage(
             alt_text='Carousel template',
-            template=CarouselTemplate(columns=c_cols))
+            template=CarouselTemplate(columns=c_cols)))
     # line_bot_api.reply_message(
     #     event.reply_token,
     #     TextSendMessage(text=msg))
