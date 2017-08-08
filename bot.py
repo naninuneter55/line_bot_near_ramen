@@ -34,12 +34,12 @@ def callback():
     return 'OK'
 
 
-@handler.add(MessageEvent, message=TextMessage)
-def handle_message(event):
-    print("=== {} ===".format(event.message.text))
-    line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage(text="あなたが言ったのは「" + event.message.text + "」"))
+# @handler.add(MessageEvent, message=TextMessage)
+# def handle_message(event):
+#     print("=== {} ===".format(event.message.text))
+#     line_bot_api.reply_message(
+#         event.reply_token,
+#         TextSendMessage(text="あなたが言ったのは「" + event.message.text + "」"))
 
 
 @handler.add(MessageEvent, message=LocationMessage)
@@ -61,7 +61,11 @@ def handle_location(event):
         print("APIアクセスに失敗しました。")
     json = data.json()
     print(">>> {} <<<".format(json['result']['rest']))
-    print(">>> {} <<<".format(len(json['result']['rest'])))
+    print(">>> {} <<<".format(len()))
+    rest_names = []
+    for rest in json['result']['rest']:
+        rest_names.push(rest['name'])
+    msg = "¥n".join(rest_names)
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text=msg))
