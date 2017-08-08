@@ -56,7 +56,7 @@ def handle_location(event):
     ]
     url += "?{0}".format(urllib.parse.urlencode(query))
     try:
-        data = requests.get(url_base + url)
+        data = requests.get(url)
     except ValueError:
         print("APIアクセスに失敗しました。")
     json = data.json()
