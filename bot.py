@@ -53,6 +53,8 @@ def handle_location(event):
     query = [
         ("latitude", latitude),
         ("longitude", longitude),
+        ("category_l", "RSFST16000"),
+        ("range", 5)
     ]
     url += "?{0}".format(urllib.parse.urlencode(query))
     try:
