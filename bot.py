@@ -99,7 +99,7 @@ def handle_location(event):
         #     print("shop_image1 is \"\"")
         # if shop_image1 is None:
         #     print("shop_image1 is None")
-        print("=== {} ===".format(rest['image_url']['shop_image1']))
+        print("=== {} ===".format(shop_image1))
         c_cols.append(CarouselColumn(
             thumbnail_image_url='https://example.com/item1.jpg',
             title=rest['name'],
