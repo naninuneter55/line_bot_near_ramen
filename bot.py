@@ -149,9 +149,7 @@ def handle_location(event):
     try:
         line_bot_api.reply_message(
             event.reply_token,
-            TemplateSendMessage(
-                alt_text='Carousel template',
-                template=carousel_template_message))
+            carousel_template_message)
     except LineBotApiError as e:
         print(e.status_code)
         print(e.error.message)
