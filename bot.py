@@ -74,15 +74,15 @@ def handle_location(event):
             title=rest['name'],
             text=rest['name'],
             actions=[
-                PostbackTemplateAction(
-                    label='postback1',
-                    text='postback text1',
-                    data='action=buy&itemid=1'
-                ),
-                MessageTemplateAction(
-                    label='message1',
-                    text='message text1'
-                ),
+                # PostbackTemplateAction(
+                #     label='postback1',
+                #     text='postback text1',
+                #     data='action=buy&itemid=1'
+                # ),
+                # MessageTemplateAction(
+                #     label='message1',
+                #     text='message text1'
+                # ),
                 URITemplateAction(
                     label='uri1',
                     uri='http://example.com/1'
