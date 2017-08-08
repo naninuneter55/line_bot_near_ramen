@@ -63,7 +63,7 @@ def handle_location(event):
     rest_names = []
     for rest in json['result']['rest']:
         rest_names.append(rest['name'])
-    msg = "¥n".join(rest_names)
+    msg = "¥¥n".join(rest_names)
     print(">>> {} <<<".format(msg))
     line_bot_api.reply_message(
         event.reply_token,
