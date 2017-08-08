@@ -60,7 +60,7 @@ def handle_location(event):
     except ValueError:
         print("APIアクセスに失敗しました。")
     json = data.json()
-    print("=== {} ===".format(json.keys()))
+    print(">>> {} <<<".format(json['result']))
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text=msg))
