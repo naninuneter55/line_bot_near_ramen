@@ -61,6 +61,7 @@ def handle_location(event):
         print("APIアクセスに失敗しました。")
     json = data.json()
     print(">>> {} <<<".format(json['result']['rest']))
+    print(">>> {} <<<".format(len(json['result']['rest'])))
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text=msg))
