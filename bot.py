@@ -105,26 +105,30 @@ def handle_location(event):
         # if shop_image1 is None:
         #     print("shop_image1 is None")
         print("=== {} ===".format(shop_image1))
-        c_cols.append(CarouselColumn(
-            thumbnail_image_url=shop_image1,
-            title=rest['name'],
-            text=rest['address'],
-            actions=[
-                PostbackTemplateAction(
-                    label='postback1',
-                    text='postback text1',
-                    data='action=buy&itemid=1'
-                ),
-                MessageTemplateAction(
-                    label='message1',
-                    text='message text1'
-                ),
-                URITemplateAction(
-                    label='uri1',
-                    uri='http://example.com/1'
-                )
-            ]
-        ))
+        if shop_image1 is not "":
+            c_cols.append(CarouselColumn(
+                thumbnail_image_url=shop_image1,
+                title=rest['name'],
+                text=rest['address'],
+                actions=[
+                    PostbackTemplateAction(
+                        label='postback1',
+                        text='postback text1',
+                        data='action=buy&itemid=1'
+                    ),
+                    MessageTemplateAction(
+                        label='message1',
+                        text='message text1'
+                    ),
+                    URITemplateAction(
+                        label='uri1',
+                        uri='http://example.com/1'
+                    )
+                ]
+            ))
+            cnt += 1
+            if cnt == 5:
+                break;
         # c_cols.append(CarouselColumn(
         #     thumbnail_image_url='https://example.com/item1.jpg',
         #     title='this is menu1',
@@ -146,9 +150,6 @@ def handle_location(event):
         #     ]
         # ))
 
-        cnt += 1
-        if cnt == 5:
-            break;
 
     msg = "\n".join(rest_names)
     print(">>> {} <<<".format(msg))
