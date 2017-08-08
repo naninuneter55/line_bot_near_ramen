@@ -90,6 +90,9 @@ def handle_location(event):
         #         )
         #     ]
         # ))
+        shop_image1 = rest['image_url']['shop_image1']
+        if shop_image1 is "":
+            print("shop_image1 is \"\"")
         print("=== {} ===".format(rest['image_url']['shop_image1']))
         c_cols.append(CarouselColumn(
             thumbnail_image_url='https://example.com/item1.jpg',
