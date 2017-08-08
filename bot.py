@@ -11,7 +11,8 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage, LocationMessage
+    MessageEvent, TextMessage, TextSendMessage, LocationMessage,
+    CarouselTemplate, CarouselColumn, TemplateSendMessage
 )
 
 app = Flask(__name__)
@@ -66,15 +67,40 @@ def handle_location(event):
     rests = json['result']['rest'][:5]
     for rest in rests:
         rest_names.append(rest['name'])
+        c_cols = []
+        c_cols.append(CarouselColumn(
+            thumbnail_image_url=rest['shop_image1'],
+            title=rest['name'],
+            text=rest['name'],
+            # actions=[
+            #     PostbackTemplateAction(
+            #         label='postback1',
+            #         text='postback text1',
+            #         data='action=buy&itemid=1'
+            #     ),
+            #     MessageTemplateAction(
+            #         label='message1',
+            #         text='message text1'
+            #     ),
+            #     URITemplateAction(
+            #         label='uri1',
+            #         uri='http://example.com/1'
+            #     )
+            # ]
+        ))
+
     msg = "\n".join(rest_names)
     print(">>> {} <<<".format(msg))
 
 
-
-
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text=msg))
+        TemplateSendMessage(
+            alt_text='Carousel template',
+            template=CarouselTemplate(columns=c_cols))
+    # line_bot_api.reply_message(
+    #     event.reply_token,
+    #     TextSendMessage(text=msg))
 
 
 if __name__ == "__main__":
