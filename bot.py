@@ -66,9 +66,9 @@ def handle_location(event):
     rest_names = []
     rests = json['result']['rest']
     cnt = 0
+    c_cols = []
     for rest in rests:
         rest_names.append(rest['name'])
-        c_cols = []
         c_cols.append(CarouselColumn(
             thumbnail_image_url=rest['image_url']['shop_image1'],
             title=rest['name'],
