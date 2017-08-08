@@ -67,7 +67,7 @@ def handle_location(event):
     rests = json['result']['rest']
     cnt = 0
     for rest in rests:
-        if rest['shop_image1'] is not None:
+        if 'shop_image1' in rest:
             rest_names.append(rest['name'])
             c_cols = []
             c_cols.append(CarouselColumn(
