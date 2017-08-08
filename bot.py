@@ -73,6 +73,7 @@ def handle_location(event):
             thumbnail_image_url=rest['image_url']['shop_image1'],
             title=rest['name'],
             text=rest['name'],
+            actions=[]
             # actions=[
             #     PostbackTemplateAction(
             #         label='postback1',
