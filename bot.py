@@ -37,12 +37,14 @@ def callback():
 
 @handler.add(JoinEvent)
 def handle_join(event):
+    print("Join")
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text="位置情報を送信してください"))
 
 @handler.add(LeaveEvent)
 def handle_leave(event):
+    print("Leave")
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text="さようなら"))
