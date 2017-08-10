@@ -35,8 +35,6 @@ def callback():
     return 'OK'
 
 
-
-
 @handler.add(MessageEvent, message=LocationMessage)
 def handle_location(event):
     latitude = event.message.latitude
@@ -66,14 +64,25 @@ def handle_location(event):
         data = requests.get(url)
     except ValueError:
         print("APIアクセスに失敗しました。")
-    json = data.json()
-    rest_names = []
-    rests = json['result']['rest']
+    result = data.json()['result']
+    if 'rest' in result:
+        reply_carousel(result, event)
+    else:
+        reply_not_found(event)
+
+
+def reply_not_found(event):
+    line_bot_api.reply_message(
+        event.reply_token,
+        TextSendMessage(text="見つかりませんでした。"))
+
+
+def reply_carousel(result, event):
+    rests = result['rest']
     print("### {} ###".format(len(rests)))
     cnt = 0
     c_cols = []
     for rest in rests:
-        rest_names.append(rest['name'])
         shop_image1 = rest['image_url']['shop_image1']
         NO_IMAGE = "https://ono-line-bot.herokuapp.com/static/images/no_image.png"
         if not shop_image1:
@@ -100,23 +109,16 @@ def handle_location(event):
         if cnt == 5:
             break;
 
-    msg = "\n".join(rest_names)
-
     try:
-        if cnt > 0:
-            carousel_template_message = TemplateSendMessage(
-                alt_text='検索結果',
-                template=CarouselTemplate(
-                    columns=c_cols
-                )
+        carousel_template_message = TemplateSendMessage(
+            alt_text='検索結果',
+            template=CarouselTemplate(
+                columns=c_cols
             )
-            line_bot_api.reply_message(
-                event.reply_token,
-                carousel_template_message)
-        else:
-            line_bot_api.reply_message(
-                event.reply_token,
-                TextSendMessage(text="見つかりませんでした。"))
+        )
+        line_bot_api.reply_message(
+            event.reply_token,
+            carousel_template_message)
     except LineBotApiError as e:
         print(e.status_code)
         print(e.error.message)
