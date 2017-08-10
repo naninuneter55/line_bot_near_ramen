@@ -35,20 +35,12 @@ def callback():
     return 'OK'
 
 
-# @handler.add(MessageEvent, message=TextMessage)
-# def handle_message(event):
-#     print("=== {} ===".format(event.message.text))
-#     line_bot_api.reply_message(
-#         event.reply_token,
-#         TextSendMessage(text="あなたが言ったのは「" + event.message.text + "」"))
 
 
 @handler.add(MessageEvent, message=LocationMessage)
 def handle_location(event):
     latitude = event.message.latitude
     longitude = event.message.longitude
-    msg = "今いるのは「" + event.message.address + "」緯度は「" + str(latitude) + "」経度は「" + str(longitude) + "」"
-    print("=== {} ===".format(msg))
     url = "https://zunda-api.herokuapp.com/api/gnavi/search_rest"
 
     # latitude = 38.24866085616044
@@ -70,7 +62,7 @@ def handle_location(event):
     ]
     url += "?{0}".format(urllib.parse.urlencode(query))
     try:
-        print(">>> {} <<<".format(url))
+        print(url)
         data = requests.get(url)
     except ValueError:
         print("APIアクセスに失敗しました。")
@@ -109,17 +101,21 @@ def handle_location(event):
 
     msg = "\n".join(rest_names)
 
-    carousel_template_message = TemplateSendMessage(
-        alt_text='Carousel template',
-        template=CarouselTemplate(
-            columns=c_cols
-        )
-    )
-
     try:
-        line_bot_api.reply_message(
-            event.reply_token,
-            carousel_template_message)
+        if cnt > 0:
+            carousel_template_message = TemplateSendMessage(
+                alt_text='検索結果',
+                template=CarouselTemplate(
+                    columns=c_cols
+                )
+            )
+            line_bot_api.reply_message(
+                event.reply_token,
+                carousel_template_message)
+        else:
+            line_bot_api.reply_message(
+                event.reply_token,
+                TextSendMessage(text="見つかりませんでした。"))
     except LineBotApiError as e:
         print(e.status_code)
         print(e.error.message)
