@@ -128,12 +128,12 @@ def reply_carousel(result, event):
             text=(address[:57] + '...') if len(address) > 60 else address,
             actions=[
                 URITemplateAction(
-                    label=tel,
-                    uri='tel:' + tel
-                ),
-                URITemplateAction(
                     label='ぐるなびで詳細を見る',
                     uri=shop_url
+                ),
+                URITemplateAction(
+                    label=tel,
+                    uri='tel:' + tel
                 ),
             ]
         ))
