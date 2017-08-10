@@ -120,25 +120,24 @@ def handle_location(event):
         address = rest['address']
         tel = rest['tel']
         shop_url = rest['url']
-        if shop_image1 is not NO_IMAGE:
-            c_cols.append(CarouselColumn(
-                thumbnail_image_url=shop_image1,
-                title=rest['name'],
-                text=(address[:57] + '...') if len(address) > 60 else address,
-                actions=[
-                    URITemplateAction(
-                        label=tel,
-                        uri='tel:' + tel
-                    ),
-                    URITemplateAction(
-                        label='ぐるなびで詳細を見る',
-                        uri=shop_url
-                    ),
-                ]
-            ))
-            cnt += 1
-            if cnt == 5:
-                break;
+        c_cols.append(CarouselColumn(
+            thumbnail_image_url=shop_image1,
+            title=rest['name'],
+            text=(address[:57] + '...') if len(address) > 60 else address,
+            actions=[
+                URITemplateAction(
+                    label=tel,
+                    uri='tel:' + tel
+                ),
+                URITemplateAction(
+                    label='ぐるなびで詳細を見る',
+                    uri=shop_url
+                ),
+            ]
+        ))
+        cnt += 1
+        if cnt == 5:
+            break;
         # c_cols.append(CarouselColumn(
         #     thumbnail_image_url='https://example.com/item1.jpg',
         #     title='this is menu1',
