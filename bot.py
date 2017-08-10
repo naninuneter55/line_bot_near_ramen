@@ -56,9 +56,9 @@ def handle_location(event):
         # ("latitude", latitude),
         # ("longitude", longitude),
         # カレー
-        # ("category_l", "RSFST16000"),
+        ("category_l", "RSFST16000"),
         # 居酒屋
-        ("category_l", "RSFST09000"),
+        # ("category_l", "RSFST09000"),
         # ("range", 5)
     ]
     url += "?{0}".format(urllib.parse.urlencode(query))
