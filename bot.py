@@ -113,12 +113,11 @@ def handle_location(event):
         #     print("shop_image1 is \"\"")
         # if shop_image1 is None:
         #     print("shop_image1 is None")
-        pr_short = rest['pr']['pr_short'] if rest['pr']['pr_short'] else ''
-        print("=== {} ===".format(pr_short))
+        address = rest['address']
         c_cols.append(CarouselColumn(
             thumbnail_image_url=shop_image1,
             title=rest['name'],
-            text=(pr_short[:57] + '...') if len(pr_short) > 60 else pr_short,
+            text=(address[:57] + '...') if len(address) > 60 else address,
             actions=[
                 MessageTemplateAction(
                     label='住所を表示',
