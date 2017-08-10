@@ -53,8 +53,8 @@ def handle_location(event):
     url = "https://zunda-api.herokuapp.com/api/gnavi/search_rest"
 
     query = [
-        ("latitude", latitude),
-        ("longitude", longitude),
+        # ("latitude", latitude),
+        # ("longitude", longitude),
         # カレー
         # ("category_l", "RSFST16000"),
         # 居酒屋
