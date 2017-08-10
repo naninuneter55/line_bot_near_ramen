@@ -37,13 +37,15 @@ def callback():
 
 @handler.add(FollowEvent)
 def handle_follow(event):
+    print("Join")
     line_bot_api.reply_message(
-        event.reply_token, TextSendMessage(text='Got follow event'))
+        event.reply_token,
+        TextSendMessage(text='位置情報を送信してください'))
 
 
 @handler.add(UnfollowEvent)
 def handle_unfollow():
-    app.logger.info("Got Unfollow event")
+    print("Got Unfollow event")
 
 
 @handler.add(JoinEvent)
@@ -53,9 +55,10 @@ def handle_join(event):
         event.reply_token,
         TextSendMessage(text="位置情報を送信してください"))
 
+
 @handler.add(LeaveEvent)
 def handle_leave():
-    app.logger.info("Got leave event")
+    print("Got leave event")
 
 
 @handler.add(MessageEvent, message=LocationMessage)
