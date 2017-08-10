@@ -52,8 +52,8 @@ def handle_location(event):
     print("=== {} ===".format(msg))
     url = "https://zunda-api.herokuapp.com/api/gnavi/search_rest"
 
-    latitude = 38.24866085616044
-    longitude = 140.89707255363464
+    # latitude = 38.24866085616044
+    # longitude = 140.89707255363464
 
     query = [
         ("latitude", latitude),
