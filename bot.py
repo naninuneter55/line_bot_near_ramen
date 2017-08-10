@@ -120,7 +120,7 @@ def handle_location(event):
             text='aaa',
             actions=[
                 MessageTemplateAction(
-                    label='label',
+                    label=rest['address'],
                     text=rest['address']
                 ),
                 URITemplateAction(
