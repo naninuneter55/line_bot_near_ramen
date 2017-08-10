@@ -114,6 +114,7 @@ def handle_location(event):
         # if shop_image1 is None:
         #     print("shop_image1 is None")
         address = rest['address']
+        tel = rest['tel']
         c_cols.append(CarouselColumn(
             thumbnail_image_url=shop_image1,
             title=rest['name'],
@@ -124,8 +125,8 @@ def handle_location(event):
                     text=rest['address']
                 ),
                 URITemplateAction(
-                    label='uri1',
-                    uri='http://example.com/1'
+                    label=tel,
+                    uri='tel:' + tel
                 )
             ]
         ))
