@@ -12,7 +12,7 @@ from linebot.exceptions import (
 from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage, LocationMessage,
     CarouselTemplate, CarouselColumn, TemplateSendMessage, PostbackTemplateAction, MessageTemplateAction,
-    URITemplateAction, StickerSendMessage, JoinEvent, LeaveEvent
+    URITemplateAction, StickerSendMessage, JoinEvent, LeaveEvent, FollowEvent, UnfollowEvent
 )
 
 app = Flask(__name__, static_url_path='/static')
@@ -35,6 +35,17 @@ def callback():
     return 'OK'
 
 
+@handler.add(FollowEvent)
+def handle_follow(event):
+    line_bot_api.reply_message(
+        event.reply_token, TextSendMessage(text='Got follow event'))
+
+
+@handler.add(UnfollowEvent)
+def handle_unfollow():
+    app.logger.info("Got Unfollow event")
+
+
 @handler.add(JoinEvent)
 def handle_join(event):
     print("Join")
@@ -43,11 +54,9 @@ def handle_join(event):
         TextSendMessage(text="位置情報を送信してください"))
 
 @handler.add(LeaveEvent)
-def handle_leave(event):
-    print("Leave")
-    line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage(text="さようなら"))
+def handle_leave():
+    app.logger.info("Got leave event")
+
 
 @handler.add(MessageEvent, message=LocationMessage)
 def handle_location(event):
