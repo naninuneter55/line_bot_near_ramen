@@ -61,7 +61,9 @@ def handle_location(event):
         # カレー
         # ("category_l", "RSFST16000"),
         # 居酒屋
-        ("category_l", "RSFST09000"),
+        # ("category_l", "RSFST09000"),
+        # ラーメン
+        ("category_l", "RSFST08000"),
         ("range", 5)
     ]
     url += "?{0}".format(urllib.parse.urlencode(query))
