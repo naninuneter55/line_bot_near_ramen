@@ -117,11 +117,11 @@ def handle_location(event):
         c_cols.append(CarouselColumn(
             thumbnail_image_url=shop_image1,
             title=rest['name'],
-            text=rest['name'],
+            text='aaa',
             actions=[
                 MessageTemplateAction(
-                    label=rest['address'],
-                    text=rest['address']
+                    label='label',
+                    text='text'
                 ),
                 URITemplateAction(
                     label='uri1',
