@@ -16,7 +16,7 @@ from linebot.models import (
     URITemplateAction, StickerSendMessage
 )
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/static')
 
 line_bot_api = LineBotApi(os.environ.get("CHANNEL_ACCESS_TOKEN", "CHANNEL_ACCESS_TOKEN"))
 handler = WebhookHandler(os.environ.get("CHANNEL_SECRET", "CHANNEL_SECRET"))
