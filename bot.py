@@ -3,7 +3,6 @@ import os
 import urllib
 import requests
 
-
 from linebot import (
     LineBotApi, WebhookHandler
 )
@@ -26,9 +25,9 @@ handler = WebhookHandler(os.environ.get("CHANNEL_SECRET", "CHANNEL_SECRET"))
 def callback():
     signature = request.headers['X-Line-Signature']
     body = request.get_data(as_text=True)
-    app.logger.info("Request body: " + body)
+    # app.logger.info("Request body: " + body)
 
-    handler.handle(body, signature)
+    # handler.handle(body, signature)
     try:
         handler.handle(body, signature)
     except InvalidSignatureError:
@@ -82,41 +81,10 @@ def handle_location(event):
     c_cols = []
     for rest in rests:
         rest_names.append(rest['name'])
-        # c_cols.append(CarouselColumn(
-        #     thumbnail_image_url=rest['image_url']['shop_image1'],
-        #     title=rest['name'],
-        #     text=rest['name'],
-        #     actions=[
-        #         # PostbackTemplateAction(
-        #         #     label='postback1',
-        #         #     text='postback text1',
-        #         #     data='action=buy&itemid=1'
-        #         # ),
-        #         # MessageTemplateAction(
-        #         #     label='message1',
-        #         #     text='message text1'
-        #         # ),
-        #         URITemplateAction(
-        #             label='uri1',
-        #             uri='http://example.com/1'
-        #         )
-        #     ]
-        # ))
         shop_image1 = rest['image_url']['shop_image1']
-        print("###")
-        print(type(shop_image1))
-        print(shop_image1)
-        print("###")
         NO_IMAGE = "https://ono-line-bot.herokuapp.com/static/images/no_image.png"
         if not shop_image1:
-            print("#######################")
             shop_image1 = NO_IMAGE
-        # print("%%% {} %%%".format(rest['image_url']))
-        # print("%%% {} %%%".format(type(shop_image1)))
-        # if shop_image1 is "":
-        #     print("shop_image1 is \"\"")
-        # if shop_image1 is None:
-        #     print("shop_image1 is None")
         address = rest['address']
         tel = rest['tel']
         shop_url = rest['url']
@@ -138,78 +106,13 @@ def handle_location(event):
         cnt += 1
         if cnt == 5:
             break;
-        # c_cols.append(CarouselColumn(
-        #     thumbnail_image_url='https://example.com/item1.jpg',
-        #     title='this is menu1',
-        #     text='description1',
-        #     actions=[
-        #         PostbackTemplateAction(
-        #             label='postback1',
-        #             text='postback text1',
-        #             data='action=buy&itemid=1'
-        #         ),
-        #         MessageTemplateAction(
-        #             label='message1',
-        #             text='message text1'
-        #         ),
-        #         URITemplateAction(
-        #             label='uri1',
-        #             uri='http://example.com/1'
-        #         )
-        #     ]
-        # ))
-
 
     msg = "\n".join(rest_names)
-    print(">>> {} <<<".format(msg))
-    print(">>> {} <<<".format(len(c_cols)))
 
     carousel_template_message = TemplateSendMessage(
         alt_text='Carousel template',
         template=CarouselTemplate(
             columns=c_cols
-            # columns=[
-            #     CarouselColumn(
-            #         thumbnail_image_url='https://example.com/item1.jpg',
-            #         title='this is menu1',
-            #         text='description1',
-            #         actions=[
-            #             PostbackTemplateAction(
-            #                 label='postback1',
-            #                 text='postback text1',
-            #                 data='action=buy&itemid=1'
-            #             ),
-            #             MessageTemplateAction(
-            #                 label='message1',
-            #                 text='message text1'
-            #             ),
-            #             URITemplateAction(
-            #                 label='uri1',
-            #                 uri='http://example.com/1'
-            #             )
-            #         ]
-            #     ),
-            #     CarouselColumn(
-            #         thumbnail_image_url='https://example.com/item2.jpg',
-            #         title='this is menu2',
-            #         text='description2',
-            #         actions=[
-            #             PostbackTemplateAction(
-            #                 label='postback2',
-            #                 text='postback text2',
-            #                 data='action=buy&itemid=2'
-            #             ),
-            #             MessageTemplateAction(
-            #                 label='message2',
-            #                 text='message text2'
-            #             ),
-            #             URITemplateAction(
-            #                 label='uri2',
-            #                 uri='http://example.com/2'
-            #             )
-            #         ]
-            #     )
-            # ]
         )
     )
 
@@ -221,30 +124,6 @@ def handle_location(event):
         print(e.status_code)
         print(e.error.message)
         print(e.error.details)
-
-    # line_bot_api.reply_message(
-    #     event.reply_token,
-    #     TemplateSendMessage(
-    #         alt_text='Carousel template',
-    #         template=carousel_template_message))
-
-    # line_bot_api.reply_message(
-    #     event.reply_token,
-    #     TemplateSendMessage(
-    #         alt_text='Carousel template',
-    #         template=CarouselTemplate(columns=c_cols)))
-
-    # line_bot_api.reply_message(
-    #     event.reply_token,
-    #     StickerSendMessage(
-    #         package_id='1',
-    #         sticker_id='1'
-    #     ))
-
-    # line_bot_api.reply_message(
-    #     event.reply_token,
-    #     TextSendMessage(text=msg))
-
 
 
 if __name__ == "__main__":
