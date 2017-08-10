@@ -120,7 +120,7 @@ def handle_location(event):
             text='aaa',
             actions=[
                 MessageTemplateAction(
-                    label=rest['address'],
+                    label='住所を表示',
                     text=rest['address']
                 ),
                 URITemplateAction(
