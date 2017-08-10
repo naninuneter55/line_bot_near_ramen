@@ -61,6 +61,12 @@ def handle_leave():
     print("Got leave event")
 
 
+@handler.add(MessageEvent, message=TextMessage)
+def handle_text(event):
+    line_bot_api.reply_message(
+        event.reply_token,
+        TextSendMessage(text="位置情報を送信してください"))
+
 @handler.add(MessageEvent, message=LocationMessage)
 def handle_location(event):
     latitude = event.message.latitude
