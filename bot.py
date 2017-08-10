@@ -101,7 +101,7 @@ def handle_location(event):
         print("###")
         if not shop_image1:
             print("#######################")
-            shop_image1 = ""
+            shop_image1 = "https://www.dummy.co.jp/image.jpg"
         # print("%%% {} %%%".format(rest['image_url']))
         # print("%%% {} %%%".format(type(shop_image1)))
         # if shop_image1 is "":
