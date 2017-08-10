@@ -12,7 +12,7 @@ from linebot.exceptions import (
 from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage, LocationMessage,
     CarouselTemplate, CarouselColumn, TemplateSendMessage, PostbackTemplateAction, MessageTemplateAction,
-    URITemplateAction, StickerSendMessage
+    URITemplateAction, StickerSendMessage, JoinEvent, LeaveEvent
 )
 
 app = Flask(__name__, static_url_path='/static')
@@ -34,6 +34,18 @@ def callback():
         abort(400)
     return 'OK'
 
+
+@handler.add(JoinEvent)
+def handle_join(event):
+    line_bot_api.reply_message(
+        event.reply_token,
+        TextSendMessage(text="位置情報を送信してください"))
+
+@handler.add(LeaveEvent)
+def handle_leave(event):
+    line_bot_api.reply_message(
+        event.reply_token,
+        TextSendMessage(text="さようなら"))
 
 @handler.add(MessageEvent, message=LocationMessage)
 def handle_location(event):
@@ -74,7 +86,7 @@ def handle_location(event):
 def reply_not_found(event):
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text="見つかりませんでした。"))
+        TextSendMessage(text="見つかりませんでした"))
 
 
 def reply_carousel(result, event):
