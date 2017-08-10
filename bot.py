@@ -69,6 +69,7 @@ def handle_location(event):
     json = data.json()
     rest_names = []
     rests = json['result']['rest']
+    print("### {} ###".format(len(rests)))
     cnt = 0
     c_cols = []
     for rest in rests:
