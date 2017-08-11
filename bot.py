@@ -116,7 +116,7 @@ def reply_carousel(result, event):
     c_cols = []
     for rest in rests:
         shop_image1 = rest['image_url']['shop_image1']
-        NO_IMAGE = "https://ono-line-bot.herokuapp.com/static/images/no_image.png"
+        NO_IMAGE = "https://line-bot-near-ramen.herokuapp.com/static/images/no_image.png"
         if not shop_image1:
             shop_image1 = NO_IMAGE
         address = rest['address']
